@@ -196,6 +196,105 @@
             <li>Committed</li>
         </ul>
     </section>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    // 1. Image Fallback Handler
+    const profileImg = document.querySelector('img');
+    if (profileImg) {
+        profileImg.addEventListener('error', () => {
+            profileImg.src = 'ethan.jpeg';
+        });
+    }
+
+    // 2. Dynamic Greeting Tag
+    const firstHeader = document.querySelector('h1');
+    if (firstHeader) {
+        const hour = new Date().getHours();
+        const timeGreeting = hour < 12 ? 'Good Morning' : hour < 18 ? 'Good Afternoon' : 'Good Evening';
+        
+        const greetingBadge = document.createElement('div');
+        greetingBadge.textContent = `${timeGreeting} • Welcome to my Portfolio`;
+        Object.assign(greetingBadge.style, {
+            color: '#16a085',
+            fontWeight: 'bold',
+            fontSize: '0.95rem',
+            letterSpacing: '0.5px',
+            marginBottom: '8px',
+            textTransform: 'uppercase'
+        });
+        firstHeader.parentNode.insertBefore(greetingBadge, firstHeader);
+    }
+
+    // 3. Card Elevation Hover Effect for Projects
+    const projectCards = document.querySelectorAll('.project-item');
+    projectCards.forEach(card => {
+        card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-3px)';
+            card.style.boxShadow = '0 6px 15px rgba(0, 0, 0, 0.1)';
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+            card.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.05)';
+        });
+    });
+
+    // 4. Elegant Floating Back-to-Top Button
+    const topBtn = document.createElement('button');
+    topBtn.innerHTML = '&#8593;';
+    topBtn.setAttribute('aria-label', 'Scroll to top');
+    
+    Object.assign(topBtn.style, {
+        position: 'fixed',
+        bottom: '30px',
+        right: '30px',
+        width: '45px',
+        height: '45px',
+        borderRadius: '50%',
+        border: 'none',
+        backgroundColor: '#3498db',
+        color: '#ffffff',
+        fontSize: '1.2rem',
+        fontWeight: 'bold',
+        cursor: 'pointer',
+        boxShadow: '0 4px 12px rgba(52, 152, 219, 0.4)',
+        opacity: '0',
+        visibility: 'hidden',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        zIndex: '1000'
+    });
+
+    document.body.appendChild(topBtn);
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 350) {
+            topBtn.style.opacity = '1';
+            topBtn.style.visibility = 'visible';
+        } else {
+            topBtn.style.opacity = '0';
+            topBtn.style.visibility = 'hidden';
+        }
+    });
+
+    topBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    topBtn.addEventListener('mouseenter', () => {
+        topBtn.style.transform = 'scale(1.1)';
+        topBtn.style.backgroundColor = '#2980b9';
+    });
+
+    topBtn.addEventListener('mouseleave', () => {
+        topBtn.style.transform = 'scale(1)';
+        topBtn.style.backgroundColor = '#3498db';
+    });
+});
+</script>
+    
 
 
 
